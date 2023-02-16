@@ -38,7 +38,7 @@ const Task = () => {
             {
                 taskList.map((element, index) => (
                     // <div key={index} {(element.complete) ? style={{margin: "8px", fontSize: "32px", color: "black", textDecoration: "line-through"}} : style={{margin: "8px", fontSize: "32px", color: "black"}}>{element.task}<button onClick={e => finishTask(element)}>Complete</button></div>
-                    <div key={index} style={{margin: "8px", fontSize: "32px", color: "black",textDecoration: element.completed && "line-through"}}>{element.task}<input type="checkbox" checked={element.completed} onClick={e => handleComplete(element)}/>
+                    <div key={index} style={{margin: "8px", fontSize: "32px", color: "black", textDecoration: element.completed && "line-through"}}>{element.task}<input type="checkbox" checked={element.completed} onClick={e => handleComplete(element)}/>
                     <button onClick={e => finishTask(element)}>Complete</button></div>
                     ))
                 }
