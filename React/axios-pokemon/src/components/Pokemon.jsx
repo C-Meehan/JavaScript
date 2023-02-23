@@ -8,6 +8,7 @@ const Pokemon = () => {
     useEffect(() => {
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=807')
         .then(response => setPokemon(response.data.results))
+        // .then(response => console.log(response))
     }, []);
     console.log(pokemon);
 
