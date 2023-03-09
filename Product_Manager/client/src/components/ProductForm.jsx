@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import axios from "axios";
 
-const ProductForm = () => {
+const ProductForm = (props) => {
 
+    const {products, setProducts} = props;
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
@@ -18,6 +19,8 @@ const ProductForm = () => {
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
+                console.log(res.data.product);
+                setProducts([...products, res.data.product]);
 
                 setTitle("");
                 setPrice(0);
@@ -41,7 +44,7 @@ const ProductForm = () => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
                 </div>
                 <div className="form-fields">
-                    <label>Title</label>
+                    <label>Description</label>
                     <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 </div>
                 <input type="submit" value="Create"/>
@@ -50,4 +53,4 @@ const ProductForm = () => {
     )
 }
 
-export default ProductForm
+export default ProductForm;
