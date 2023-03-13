@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import DeleteButton from './DeleteButton';
 
 const PersonList = (props) => {
-    const {removeFromDom, people, setPeople} = props;
+    // const {removeFromDom, people, setPeople} = props;
+    const [people, setPeople] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/people")
@@ -15,14 +17,17 @@ const PersonList = (props) => {
             console.log(err);
         })
     }, [])
-    
-    const deletePerson = (personId) => {
-        axios.delete('http://localhost:8000/api/people/' + personId)
-            .then(res => {
-                removeFromDom(personId)
-            })
-            .catch(err => console.log(err))
-    }
+
+    const removeFromDom = personId => {
+        setPeople(people.filter(person => person._id !== personId))
+}    
+    // const deletePerson = (personId) => {
+    //     axios.delete('http://localhost:8000/api/people/' + personId)
+    //         .then(res => {
+    //             removeFromDom(personId)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
     return (
         <div>
             {
@@ -35,7 +40,7 @@ const PersonList = (props) => {
                             |
                             <Link to={"/people/edit/" + person._id}> Edit </Link>
                             |
-                            <button className="deleteBtn" onClick={(e) => {deletePerson(person._id)}}> Delete </button>
+                            <DeleteButton personId={person._id} successCallback={() => removeFromDom(person._id)}/>
                         </div>
                 )})
             }
