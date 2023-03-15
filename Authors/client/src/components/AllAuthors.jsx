@@ -10,6 +10,8 @@ const AllAuthors = (props) => {
         setAuthorList(authorList.filter(author => author._id !== authorId));
     }
 
+    console.log(authorList.sort());
+
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors')
             .then((res) => {
@@ -41,6 +43,9 @@ const AllAuthors = (props) => {
                     </tr>
                 </thead>
                 <tbody>
+                {/* {
+                    // authorList.sort((a, b) => (a.name > b.name) ? 1 : -1)
+                } */}
                 {
                     authorList.map((author, index) => {
                         return (
