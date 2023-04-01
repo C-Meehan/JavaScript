@@ -37,7 +37,7 @@ const AllProducts = (props) => {
                             |
                             <Link to={`/products/edit/${product._id}`}> Edit </Link>
                             |
-                            <button className="deleteBtn" onClick={(e) => {deleteProduct(product._id)}}> Delete </button>
+                            <button className="btn btn-danger m-2" onClick={(e) => {deleteProduct(product._id)}}> Delete </button>
                         </div>
                 )})
             }

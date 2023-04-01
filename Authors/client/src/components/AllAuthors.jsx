@@ -10,7 +10,7 @@ const AllAuthors = (props) => {
         setAuthorList(authorList.filter(author => author._id !== authorId));
     }
 
-    console.log(authorList.sort());
+    // console.log(authorList.sort());
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors')
@@ -35,7 +35,7 @@ const AllAuthors = (props) => {
         <div className="allAuthors">
             <Link to={"/authors/create"}>Add an author</Link>
             <h3>We have quotes by:</h3>
-            <table className="table table-striped">
+            <table className="table table-striped table-dark table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Author</th>
@@ -51,7 +51,7 @@ const AllAuthors = (props) => {
                         return (
                             // <div key={index}>
                                 <tr key={index}>
-                                    <th scope="row">{author.name}</th>
+                                    <th scope="row" className='text-capitalize'><Link to={`/authors/${author._id}`} className='text-light'>{author.name}</Link></th>
                                     <td><Link to={`/authors/edit/${author._id}`} className="btn btn-warning">Edit</Link> <button className="btn btn-danger" onClick={(e) => {deleteAuthor(author._id)}}> Delete </button></td>
                                 </tr>
                             // </div>

@@ -7,14 +7,17 @@ const UpdateAuthor = () => {
     const {id} = useParams();
     const [name, setName] = useState("");
     const [error, setError] = useState({});
+    const [authorNotFound, setAuthorNotFound] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/authors/" + id)
             .then(res => {
+                console.log("In then")
                 setName(res.data.name);
             })
-            .catch(err => console.log(err))
+            .catch(err => setAuthorNotFound(`Author not found using that ID`))
+            // setAuthorNotFound(`Author not found using that ID`);
     }, [])
 
     const updateAuthor = (e) => {
@@ -32,10 +35,11 @@ const UpdateAuthor = () => {
     }
 
     return (
-        <div>
+        <div className='col-md-6 mx-auto'>
             <Link to={"/"}>Home</Link>
-            <h3>Edit this author</h3>
-            <form onSubmit={updateAuthor}>
+            <h3>Edit {name}</h3>
+            <form className='col-md-6 mx-auto' onSubmit={updateAuthor}>
+                {authorNotFound ? <h2>{authorNotFound} <Link to={"/authors/create"}>Click here to add author</Link></h2> : null}
                 {error.name ? error.name.message : ""}
                 <label>Name: </label>
                 <input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}} />
